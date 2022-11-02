@@ -1,0 +1,3 @@
+class BaseConfig {
+  BaseConfig._();
+}
