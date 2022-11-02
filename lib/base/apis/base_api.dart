@@ -129,6 +129,7 @@ class BaseApi {
       query: params,
       headers: thisHeader,
       decoder: decoder,
+      contentType: "application/json",
     );
     printLog(
         method: "POST",

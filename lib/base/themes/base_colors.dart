@@ -10,13 +10,13 @@ class BaseColors {
   static const Color fourthBlue = Color(0xff90E0EF);
   static const Color primaryBlack = Color(0xff363636);
   static const Color secondBlack = Color(0xff143048);
-  static Color thirdBlack = Color(0xff363636).withOpacity(0.5);
-  static Color fourthBlack = Color(0xff363636).withOpacity(0.3);
+  static Color thirdBlack = const Color(0xff363636).withOpacity(0.5);
+  static Color fourthBlack = const Color(0xff363636).withOpacity(0.3);
   static const Color primaryGrey = Color(0xff6C757D);
   static const Color secondGrey = Color(0xffDEE2E6);
-  static Color primaryStroke = Color(0xffCFD2CF).withOpacity(0.9);
+  static Color primaryStroke = const Color(0xffCFD2CF).withOpacity(0.9);
   static const Color primaryWhite = Color(0xffFFFFFF);
-  static Color secondWhite = Color(0xffFFFFFF).withOpacity(0.5);
+  static Color secondWhite = const Color(0xffFFFFFF).withOpacity(0.5);
   static const Color primaryGreen = Color(0xff80B918);
   static const Color primaryMaroon = Color(0xffBA135D);
   static const Color primaryRed = Color(0xffDC2F02);

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pitjarus_test/modules/login/view/login_page.dart';
 
 import '../../../base/base.dart';
 
@@ -31,10 +32,10 @@ class _SplashScreenState extends State<SplashScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Smart Airport",
+              "Splash screen nih",
               style: TextStyle(
                   fontSize: 32,
-                  color: Colors.white,
+                  color: BaseColors.primaryBlue,
                   fontWeight: FontWeight.w600,
                   shadows: [
                     Shadow(
@@ -56,9 +57,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
-    await Future.delayed(1.seconds);
-
     //init base
     await Base.init();
+    Get.offAll(() => const LoginPage());
   }
 }
