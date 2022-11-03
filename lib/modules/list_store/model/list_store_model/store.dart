@@ -19,8 +19,8 @@ class Store {
   String? areaName;
   String? regionId;
   String? regionName;
-  String? latitude;
-  String? longitude;
+  double? latitude;
+  double? longitude;
   bool visited;
   String imageUrl;
   Store(
@@ -63,8 +63,10 @@ class Store {
         areaName: json['area_name'] as String?,
         regionId: json['region_id'] as String?,
         regionName: json['region_name'] as String?,
-        latitude: json['latitude'] as String?,
-        longitude: json['longitude'] as String?,
+        latitude: (double.tryParse(json['latitude'].toString()) ?? 0),
+        // +Random.secure().nextDouble(),
+        longitude: (double.tryParse(json['longitude'].toString()) ?? 0),
+        //  + Random.secure().nextDouble(),
         visited: json['visited'] as bool? ?? false,
       );
 
@@ -107,8 +109,8 @@ class Store {
     String? areaName,
     String? regionId,
     String? regionName,
-    String? latitude,
-    String? longitude,
+    double? latitude,
+    double? longitude,
     bool? visited,
   }) {
     return Store(

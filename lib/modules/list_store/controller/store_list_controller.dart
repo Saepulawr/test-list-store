@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pitjarus_test/base/base.dart';
 import 'package:pitjarus_test/modules/list_store/model/list_store_model/store.dart';
 
 class ListStoreController extends GetxController {
   RxList<Store> listOfStoreData = RxList([]);
+  final Rx<LatLng?> currentPosition = Rx(null);
   @override
   void onInit() {
     debounce(listOfStoreData, (_) {
@@ -16,6 +19,9 @@ class ListStoreController extends GetxController {
             .map((element) => jsonEncode(element.toJson()))
             .toList(),
       );
+      if (kDebugMode) {
+        print("Save success");
+      }
     }, time: 300.milliseconds);
     super.onInit();
   }
@@ -28,8 +34,9 @@ class ListStoreController extends GetxController {
       try {
         json = jsonDecode(rawData);
         stores.add(Store.fromJson(json));
-        // ignore: empty_catches
-      } catch (e) {}
+      } catch (e, s) {
+        if (kDebugMode) print(s);
+      }
     }
     return stores;
   }
