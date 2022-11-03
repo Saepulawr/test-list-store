@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:pitjarus_test/base/base.dart';
 import 'package:pitjarus_test/modules/login/api/login_api.dart';
 import 'package:pitjarus_test/modules/list_store/controller/store_list_controller.dart';
+import 'package:pitjarus_test/modules/login/view/login_page.dart';
 
 class LoginController extends GetxController {
   RxBool isLogingin = RxBool(false);
@@ -30,5 +31,11 @@ class LoginController extends GetxController {
       storeListController.listOfStoreData.addAll(datas);
       return true;
     }
+  }
+
+  void logout() {
+    final ListStoreController listStoreController = Get.find();
+    listStoreController.listOfStoreData.clear();
+    Get.offAll(() => const LoginPage());
   }
 }

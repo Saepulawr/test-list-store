@@ -22,27 +22,29 @@ class Store {
   String? latitude;
   String? longitude;
   bool visited;
-  Store({
-    this.storeId,
-    this.storeCode,
-    this.storeName,
-    this.address,
-    this.dcId,
-    this.dcName,
-    this.accountId,
-    this.accountName,
-    this.subchannelId,
-    this.subchannelName,
-    this.channelId,
-    this.channelName,
-    this.areaId,
-    this.areaName,
-    this.regionId,
-    this.regionName,
-    this.latitude,
-    this.longitude,
-    this.visited = false,
-  });
+  String imageUrl;
+  Store(
+      {this.storeId,
+      this.storeCode,
+      this.storeName,
+      this.address,
+      this.dcId,
+      this.dcName,
+      this.accountId,
+      this.accountName,
+      this.subchannelId,
+      this.subchannelName,
+      this.channelId,
+      this.channelName,
+      this.areaId,
+      this.areaName,
+      this.regionId,
+      this.regionName,
+      this.latitude,
+      this.longitude,
+      this.visited = false,
+      this.imageUrl =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Alfamart_KTM_Jonggol%2C_Cileungsi_-_panoramio.jpg/800px-Alfamart_KTM_Jonggol%2C_Cileungsi_-_panoramio.jpg"});
 
   factory Store.fromJson(Map<String, dynamic> json) => Store(
         storeId: json['store_id'] as String?,
@@ -63,6 +65,7 @@ class Store {
         regionName: json['region_name'] as String?,
         latitude: json['latitude'] as String?,
         longitude: json['longitude'] as String?,
+        visited: json['visited'] as bool? ?? false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,6 +87,7 @@ class Store {
         'region_name': regionName,
         'latitude': latitude,
         'longitude': longitude,
+        'visited': visited,
       };
 
   Store copyWith({

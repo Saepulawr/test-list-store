@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pitjarus_test/base/base.dart';
+import 'package:pitjarus_test/modules/detail_store/view/detail_store_page.dart';
 import 'package:pitjarus_test/modules/list_store/controller/store_list_controller.dart';
 
 class ItemListStore extends StatelessWidget {
@@ -16,8 +17,9 @@ class ItemListStore extends StatelessWidget {
       child: Card(
         child: ListTile(
           onTap: () {
-            _listStoreController.listOfStoreData[index] =
-                data.copyWith(visited: !data.visited);
+            Get.to(() => DetailStorePage(
+                  index: index,
+                ));
           },
           isThreeLine: true,
           title: Text(data.storeName ?? "Belum ada nama"),
