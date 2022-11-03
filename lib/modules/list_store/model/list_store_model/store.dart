@@ -21,7 +21,7 @@ class Store {
   String? regionName;
   String? latitude;
   String? longitude;
-
+  bool visited;
   Store({
     this.storeId,
     this.storeCode,
@@ -41,6 +41,7 @@ class Store {
     this.regionName,
     this.latitude,
     this.longitude,
+    this.visited = false,
   });
 
   factory Store.fromJson(Map<String, dynamic> json) => Store(
@@ -104,6 +105,7 @@ class Store {
     String? regionName,
     String? latitude,
     String? longitude,
+    bool? visited,
   }) {
     return Store(
       storeId: storeId ?? this.storeId,
@@ -124,6 +126,7 @@ class Store {
       regionName: regionName ?? this.regionName,
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
+      visited: visited ?? this.visited,
     );
   }
 
@@ -154,5 +157,6 @@ class Store {
       regionId.hashCode ^
       regionName.hashCode ^
       latitude.hashCode ^
-      longitude.hashCode;
+      longitude.hashCode ^
+      visited.hashCode;
 }

@@ -27,6 +27,20 @@ class BaseStorage {
     return sharedPreferences.getString(key) ?? defaultValue;
   }
 
+  Future<bool> saveListString({
+    required String key,
+    required List<String> value,
+  }) async {
+    return sharedPreferences.setStringList(key, value);
+  }
+
+  List<String> loadListString({
+    required String key,
+    List<String>? defaultValue,
+  }) {
+    return sharedPreferences.getStringList(key) ?? defaultValue ?? [];
+  }
+
   Future<bool> saveJson({
     required String key,
     required Map<String, dynamic> value,

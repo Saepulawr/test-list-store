@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pitjarus_test/base/base.dart';
 import 'package:pitjarus_test/base/widgets/third_party/button.dart';
+import 'package:pitjarus_test/modules/list_store/view/list_store_page.dart';
 import 'package:pitjarus_test/modules/login/controller/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                               username: _textEditingControllerUsername.text,
                               password: _textEditingControllerPassword.text);
                           if (res) {
-                            BaseDialog.showSuccess();
+                            Get.offAll(() => const ListStorePage());
                           }
                         }
                       },

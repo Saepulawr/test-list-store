@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pitjarus_test/modules/list_store/controller/store_list_controller.dart';
+import 'package:pitjarus_test/modules/list_store/view/list_store_page.dart';
 import 'package:pitjarus_test/modules/login/view/login_page.dart';
 
 import '../../../base/base.dart';
@@ -59,6 +61,14 @@ class _SplashScreenState extends State<SplashScreen>
   FutureOr<void> afterFirstLayout(BuildContext context) async {
     //init base
     await Base.init();
-    Get.offAll(() => const LoginPage());
+    final ListStoreController listStoreController = Get.find();
+
+    final stores = listStoreController.loadDataFromLocalStorage();
+    if (stores.isEmpty) {
+      Get.offAll(() => const LoginPage());
+    } else {
+      listStoreController.listOfStoreData.addAll(stores);
+      Get.offAll(() => const ListStorePage());
+    }
   }
 }

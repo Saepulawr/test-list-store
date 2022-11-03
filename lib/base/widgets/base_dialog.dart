@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pitjarus_test/base/themes/base_colors.dart';
 import 'package:pitjarus_test/base/themes/base_fonts.dart';
+import 'package:cool_alert/cool_alert.dart';
 
 class BaseDialog {
   BaseDialog._();
@@ -14,15 +15,12 @@ class BaseDialog {
     String? title,
     String? message,
   }) async {
-    return await _show<T?>(
-      icon: Image.asset(
-        "assets/Icons/Solid/Success Pop Up.png",
-        width: 100,
-        height: 100,
-      ),
+    return await CoolAlert.show(
+      context: Get.context!,
+      type: CoolAlertType.success,
       title: title,
-      message: message,
-      onDismiss: onDismiss,
+      text: message,
+      onConfirmBtnTap: onDismiss,
     );
   }
 
@@ -31,15 +29,12 @@ class BaseDialog {
     String? title,
     String? message,
   }) async {
-    return await _show<T?>(
-      icon: Image.asset(
-        "assets/Icons/Solid/error_popup.png",
-        width: 100,
-        height: 100,
-      ),
+    return await CoolAlert.show(
+      context: Get.context!,
+      type: CoolAlertType.error,
       title: title,
-      message: message,
-      onDismiss: onDismiss,
+      text: message,
+      onConfirmBtnTap: onDismiss,
     );
   }
 
@@ -50,6 +45,16 @@ class BaseDialog {
     String? buttonCancelText,
   }) async {
     assert(title != null || message != null, "Title and Message cannot null");
+    return await CoolAlert.show(
+      context: Get.context!,
+      type: CoolAlertType.confirm,
+      title: title,
+      text: message,
+      confirmBtnText: buttonOKText ?? "OK",
+      onConfirmBtnTap: () => Get.back(result: true),
+      cancelBtnText: buttonCancelText ?? "Cancel",
+      onCancelBtnTap: () => Get.back(result: false),
+    );
     final res = await _show<bool?>(
         title: title,
         message: message,
@@ -73,7 +78,7 @@ class BaseDialog {
                 style: BaseFonts.h4
                     .copyWith(color: BaseColors.thirdBlack.withOpacity(0.5)),
               )),
-          SizedBox(width: 8)
+          const SizedBox(width: 8)
         ]);
     return res ?? false;
   }
@@ -97,20 +102,25 @@ class BaseDialog {
         onTimeout?.call();
       });
     }
-    await _show(
-      barrierDismissible: false,
-      icon: SizedBox(
-        height: 30,
-        child: Center(
-          child: SizedBox(
-            height: 30,
-            width: 30,
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      ),
-      title: message,
+    await CoolAlert.show(
+      context: Get.context!,
+      type: CoolAlertType.loading,
+      text: message,
     );
+    // await _show(
+    //   barrierDismissible: false,
+    //   icon: const SizedBox(
+    //     height: 30,
+    //     child: Center(
+    //       child: SizedBox(
+    //         height: 30,
+    //         width: 30,
+    //         child: CircularProgressIndicator(),
+    //       ),
+    //     ),
+    //   ),
+    //   title: message,
+    // );
     _timerTimeout?.cancel();
   }
 
@@ -128,7 +138,7 @@ class BaseDialog {
       final res = await showDialog(
         barrierDismissible: barrierDismissible,
         context: Get.context!,
-        barrierColor: Color(0xffD9D9D9).withOpacity(0.5),
+        barrierColor: const Color(0xffD9D9D9).withOpacity(0.5),
         builder: (context) => AlertDialog(
           elevation: 1,
           shape: RoundedRectangleBorder(
@@ -141,7 +151,7 @@ class BaseDialog {
                   style: BaseFonts.h3Bold,
                 )
               : null,
-          contentPadding: EdgeInsets.all(30),
+          contentPadding: const EdgeInsets.all(30),
           content: message != null
               ? Text(
                   message,

@@ -6,21 +6,21 @@ import 'package:collection/collection.dart';
 
 import 'store.dart';
 
-class StoreListModel {
+class ListStoreModel {
   List<Store>? stores;
   String? status;
   String? message;
 
-  StoreListModel({this.stores, this.status, this.message});
+  ListStoreModel({this.stores, this.status, this.message});
 
-  factory StoreListModel.fromJson(dynamic jsonRaw) {
+  factory ListStoreModel.fromJson(dynamic jsonRaw) {
     Map<String, dynamic> json = {};
     if (jsonRaw is String) {
       json = jsonDecode(jsonRaw);
     } else {
       json = jsonRaw;
     }
-    return StoreListModel(
+    return ListStoreModel(
       stores: (json['stores'] as List<dynamic>?)
           ?.map((e) => Store.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -35,12 +35,12 @@ class StoreListModel {
         'message': message,
       };
 
-  StoreListModel copyWith({
+  ListStoreModel copyWith({
     List<Store>? stores,
     String? status,
     String? message,
   }) {
-    return StoreListModel(
+    return ListStoreModel(
       stores: stores ?? this.stores,
       status: status ?? this.status,
       message: message ?? this.message,
@@ -50,7 +50,7 @@ class StoreListModel {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! StoreListModel) return false;
+    if (other is! ListStoreModel) return false;
     final mapEquals = const DeepCollectionEquality().equals;
     return mapEquals(other.toJson(), toJson());
   }

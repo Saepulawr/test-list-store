@@ -120,16 +120,16 @@ class BaseApi {
     Map<String, String>? headers,
     Map<String, String>? params,
     Map<String, dynamic>? data,
+    bool sendAsFormData = false,
   }) async {
     final thisHeader =
         enableAuthHeader ? _handlingHeader(userHeader: headers) : headers;
     final response = await requestHandler.post(
       url,
-      data,
+      sendAsFormData ? FormData(data ?? {}) : data,
       query: params,
       headers: thisHeader,
       decoder: decoder,
-      contentType: "application/json",
     );
     printLog(
         method: "POST",
@@ -171,14 +171,16 @@ class BaseApi {
     Map<String, String>? headers,
     Map<String, String>? params,
     Map<String, dynamic>? data,
+    bool sendAsFormData = false,
   }) async {
     final thisHeader =
         enableAuthHeader ? _handlingHeader(userHeader: headers) : headers;
-    final response = await requestHandler.put(url, data,
+    final response = await requestHandler.put(
+        url, sendAsFormData ? FormData(data ?? {}) : data,
         query: params,
         headers: thisHeader,
         decoder: decoder,
-        contentType: "application/json");
+        contentType: "application/json,");
     printLog(
         method: "PUT",
         url: url,
